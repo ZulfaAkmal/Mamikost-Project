@@ -1,30 +1,36 @@
-# MamiKost – Boarding House Website
+# MamiKost – Website Pencarian dan Reservasi Kost
 
-MamiKost is a frontend website project inspired by [Mamikos](https://mamikos.com/), an Indonesian boarding house discovery and booking platform.
+MamiKost merupakan proyek pengembangan website frontend yang mengkloning dan terinspirasi dari website resmi [Mamikos](https://mamikos.com/), sebuah platform pencarian dan penyewaan kost di Indonesia.
 
-This project was developed as part of the Frontend Engineer Technical Test for MagangHub. It aims to recreate a simplified boarding house website experience, featuring accommodation listings, property information, and an inquiry form connected to a custom REST API.
+Proyek ini dikembangkan sebagai bagian dari **Frontend Engineer Technical Test – MagangHub**. Aplikasi bertujuan menghadirkan pengalaman sederhana dalam mencari informasi kost, melihat detail properti, serta mengirimkan reservasi melalui formulir yang terhubung dengan REST API yang dikembangkan secara mandiri.
 
 ## Project Overview
 
-**Project Name:** MamiKost  
-**Project Type:** Website Clone / Inspired Project  
-**Reference Website:** [Mamikos](https://mamikos.com/)  
-**Purpose:** Frontend Engineer Technical Test – MagangHub
+- **Nama Proyek:** MamiKost
+- **Jenis Proyek:** Website Clone / Inspired Project
+- **Website Referensi:** [Mamikos.com](https://mamikos.com/)
+- **Tujuan:** Frontend Engineer Technical Test – MagangHub
+- **Repository GitHub:** [Mamikost-Project](https://github.com/ZulfaAkmal/Mamikost-Project)
+- **Website Demo:** [https://mamikost.vercel.app](https://mamikost.vercel.app)
+- **Backend API:** [https://mamikost-backend.vercel.app/api](https://mamikost-backend.vercel.app/api)
 
-## Features
+## Fitur Aplikasi
 
-- Responsive homepage inspired by Mamikos.
-- Boarding house listings and accommodation information.
-- Property detail presentation.
-- Booking / inquiry form.
-- Dynamic accommodation data fetched from a custom REST API.
-- Inquiry submission through a POST API.
-- Loading and error handling for API requests.
-- Form submission feedback and input validation.
+- Halaman utama responsif yang terinspirasi dari website Mamikos.
+- Menampilkan daftar kost beserta informasi akomodasi.
+- Halaman detail untuk menampilkan informasi kost.
+- Formulir reservasi atau pengajuan informasi kost.
+- Pengambilan data kost secara dinamis melalui REST API.
+- Pengiriman data reservasi melalui POST API.
+- Penanganan loading dan error pada pengambilan data API.
+- Notifikasi keberhasilan dan kegagalan pengiriman formulir.
+- Validasi input pada formulir reservasi.
+- Penanganan kesalahan koneksi ketika API tidak dapat diakses.
 
-## Tech Stack
+## Teknologi yang Digunakan
 
 ### 1. Frontend
+
 - React.js
 - Vite
 - JavaScript (ES6+)
@@ -35,31 +41,37 @@ This project was developed as part of the Frontend Engineer Technical Test for M
 - Lucide React
 
 ### 2. Backend
+
 - Node.js
 - Express.js
 - REST API
 - CORS
 - JSON
 
-### 3. Data Management
+### 3. Pengelolaan Data
+
 - JavaScript Static Data (`kosts.js`)
-- In-memory data storage (`inquiries.js`)
-- No external database is currently used.
+- In-memory storage untuk data reservasi
+- Tidak menggunakan database eksternal
 
 ### 4. Development Tools
+
 - Visual Studio Code
 - Git
 - GitHub
 - npm
+- Vercel
 
 ### 5. AI-Assisted Development
+
 - ChatGPT
 - Google Gemini
 
-AI tools were used to assist with project planning, code generation, implementation guidance, debugging, and interface refinement. Generated code was reviewed, tested, and adjusted throughout the development process.
+AI digunakan untuk membantu proses perencanaan proyek, pembuatan dan pengembangan kode, panduan implementasi, debugging, serta penyempurnaan antarmuka. Kode yang dihasilkan melalui AI ditinjau, diuji, dan disesuaikan selama proses pengembangan.
 
-## Project Structure
+## Struktur Project
 
+```text
 mamikost/
 │
 ├── backend/
@@ -68,8 +80,7 @@ mamikost/
 │   │   └── inquiryController.js
 │   │
 │   ├── data/
-│   │   ├── kosts.js
-│   │   └── inquiries.js
+│   │   └── kosts.js
 │   │
 │   ├── routes/
 │   │   ├── kostRoutes.js
@@ -78,84 +89,131 @@ mamikost/
 │   ├── app.js
 │   └── server.js
 │
-├── frontend/
-│   ├── public/
-│   └── src/
-│       ├── components/
-│       ├── pages/
-│       ├── assets/
-│       └── ...
+├── public/
 │
+├── src/
+│   ├── components/
+│   │   ├── BookingModal.jsx
+│   │   └── ...
+│   │
+│   ├── pages/
+│   │   └── ...
+│   │
+│   ├── assets/
+│   │   └── ...
+│   │
+│   ├── css/
+│   │   └── ...
+│   │
+│   └── ...
+│
+├── package.json
+├── vite.config.js
 └── README.md
+```
 
+## Dokumentasi API
 
-## API Documentation
+Backend menyediakan dua endpoint utama untuk mendukung pengambilan data kost dan pengiriman reservasi.
 
-The backend provides two main API endpoints to support accommodation listings and inquiry submissions.
+### 1. GET – Daftar Kost
 
-### 1. Get Boarding House Listings
+**Endpoint:**
 
-**Endpoint:** `GET /api/kosts`
-
-Retrieves the available boarding house data from the backend.
-
-**Example Request:**
+```http
 GET /api/kosts
+```
 
-**Example Response:**
+Digunakan untuk mengambil daftar kost yang tersedia dari backend.
+
+**Contoh Request:**
+
+```http
+GET https://mamikost-backend.vercel.app/api/kosts
+```
+
+**Contoh Response:**
+
+```json
 {
   "success": true,
   "data": [
     {
       "id": 1,
-      "name": "Sample Kost",
+      "name": "Kost Green Residence",
       "price": 1500000
     }
   ]
 }
+```
 
-*Note: The response above is an illustrative example. Actual fields depend on the implemented data structure.*
+Response di atas merupakan ilustrasi struktur data. Data aktual berisi informasi kost yang tersedia pada aplikasi.
 
-### 2. Submit an Inquiry
+### 2. POST – Pengiriman Reservasi
 
-**Endpoint:** `POST /api/inquiries`
+**Endpoint:**
 
-Submits a booking or accommodation inquiry to the backend.
-
-**Example Request:**
+```http
 POST /api/inquiries
+```
+
+Digunakan untuk mengirimkan data reservasi kost melalui formulir pada halaman detail kost.
+
+**Contoh Request:**
+
+```http
+POST https://mamikost-backend.vercel.app/api/inquiries
 Content-Type: application/json
+```
 
-Example request body:
+**Request Body:**
 
+```json
 {
-  "name": "John Doe",
-  "email": "john@example.com",
+  "kostId": 1,
+  "name": "Akmal Testing",
   "phone": "081234567890",
-  "message": "I would like to inquire about this boarding house."
+  "startDate": "2026-12-01",
+  "duration": "3",
+  "message": "Saya ingin melakukan reservasi kost."
 }
+```
 
-**Successful Response:**
+**Response Berhasil (201 Created):**
 
+```json
 {
   "success": true,
-  "message": "Inquiry submitted successfully."
+  "message": "Reservasi berhasil dikirim.",
+  "data": {
+    "id": 1,
+    "kostId": 1,
+    "name": "Akmal Testing",
+    "phone": "081234567890",
+    "startDate": "2026-12-01",
+    "duration": 3,
+    "message": "Saya ingin melakukan reservasi kost.",
+    "createdAt": "2026-11-07T00:00:00.000Z"
+  }
 }
+```
 
-**Validation Error Response (400):**
+**Response Validasi Error (400 Bad Request):**
 
+```json
 {
   "success": false,
-  "message": "Please provide all required fields."
+  "message": "Nama, nomor telepon, tanggal mulai, durasi, dan kost wajib diisi."
 }
+```
 
-*Note: Request fields and response formats should be adjusted to match the actual backend implementation.*
+Pesan error dapat berbeda sesuai jenis input yang tidak valid.
 
 ## Frontend Request States
 
-The frontend is designed to handle different API request conditions:
+Frontend menangani beberapa kondisi selama proses komunikasi dengan backend:
 
-| Request | State |
+| Request | Kondisi |
 |---|---|
 | GET | Loading |
 | GET | Error |
@@ -163,77 +221,133 @@ The frontend is designed to handle different API request conditions:
 | POST | Validation Error |
 | POST | Network Error |
 
-These states provide feedback to users during data retrieval and form submission.
+Penanganan kondisi tersebut bertujuan memberikan informasi yang jelas kepada pengguna ketika data sedang dimuat, berhasil dikirim, atau mengalami kegagalan.
 
-## Getting Started
+## Instalasi dan Menjalankan Project
 
-### Prerequisites
+### Prasyarat
 
-Make sure you have installed:
+Pastikan perangkat telah memiliki:
 
 - Node.js
 - npm
 - Git
 
-### Installation
+### 1. Clone Repository
 
-Clone the repository:
-git clone <YOUR_GITHUB_REPOSITORY_URL>
+```bash
+git clone https://github.com/ZulfaAkmal/Mamikost-Project.git
+```
 
-Navigate to the project directory:
-cd mamikost
+Masuk ke direktori project:
 
-Install frontend dependencies:
-cd frontend
+```bash
+cd Mamikost-Project
+```
+
+### 2. Instalasi Frontend
+
+Pada direktori utama project, jalankan:
+
+```bash
 npm install
+```
 
-Install backend dependencies:
-cd ../backend
-npm install
+### 3. Instalasi Backend
 
-### Running Locally
+Masuk ke direktori backend:
 
-Start the backend server:
+```bash
 cd backend
-npm run dev
+npm install
+```
 
-Start the frontend development server in another terminal:
-cd frontend
-npm run dev
+### 4. Menjalankan Backend
 
-The frontend and backend run separately during local development.
+Pada direktori backend, jalankan:
+
+```bash
+npm run dev
+```
+
+Backend berjalan pada:
+
+```text
+http://localhost:5000
+```
+
+### 5. Menjalankan Frontend
+
+Buka terminal baru pada direktori utama project, kemudian jalankan:
+
+```bash
+npm run dev
+```
+
+Frontend dapat diakses melalui alamat yang ditampilkan oleh Vite, biasanya:
+
+```text
+http://localhost:5173
+```
+
+Frontend dan backend dijalankan secara terpisah selama pengembangan lokal.
 
 **Local API Base URL:**
+
+```text
 http://localhost:5000/api
+```
 
+## Pengelolaan dan Penyimpanan Data
 
-*Note: The actual scripts and port configuration depend on the project's `package.json` and server configuration.*
+Project ini menggunakan data statis berbasis JavaScript dan penyimpanan sementara untuk pengajuan reservasi.
 
-## Data Storage
+- Data daftar kost disimpan dalam file `backend/data/kosts.js`.
+- Data reservasi disimpan menggunakan in-memory storage pada backend.
+- Data reservasi tidak disimpan secara permanen.
+- Data reservasi dapat hilang ketika proses backend dimulai ulang atau ketika instance backend berubah.
+- Project tidak menggunakan database eksternal seperti MySQL atau PostgreSQL.
 
-This project currently uses JavaScript-based static data and temporary in-memory storage instead of an external database.
-
-- Boarding house listings are stored in `kosts.js`.
-- Inquiry submissions are stored temporarily in `inquiries.js`.
-- Inquiry data is not persistent and will reset when the backend server restarts.
-
-No MySQL or PostgreSQL database is required.
+Pendekatan ini digunakan untuk memenuhi kebutuhan technical test yang memperbolehkan penyimpanan sementara tanpa database permanen.
 
 ## Deployment
 
-**Live Website:** [Deployment URL – To be added]
+Aplikasi frontend dan backend dideploy menggunakan Vercel.
 
-**Backend API:** [Backend API URL – To be added]
+- **Frontend:** [https://mamikost.vercel.app](https://mamikost.vercel.app)
+- **Backend API:** [https://mamikost-backend.vercel.app/api](https://mamikost-backend.vercel.app/api)
+- **GitHub Repository:** [https://github.com/ZulfaAkmal/Mamikost-Project](https://github.com/ZulfaAkmal/Mamikost-Project)
 
-The deployed frontend must communicate with the deployed backend API to ensure that the application works outside the local development environment.
+Frontend production terhubung dengan backend production melalui konfigurasi environment variable:
 
-## Project Notes
+```env
+VITE_API_BASE_URL=https://mamikost-backend.vercel.app/api
+```
 
-This is an independent educational and technical assessment project inspired by Mamikos. It is not affiliated with or officially associated with Mamikos.
+Dengan konfigurasi tersebut, frontend dapat mengambil data kost dan mengirimkan reservasi melalui backend yang telah dideploy.
 
-The project focuses on frontend implementation, AI-assisted development workflow, REST API integration, and basic backend request handling.
+## Pengujian Aplikasi
+
+Pengujian dilakukan untuk memastikan fitur utama aplikasi berjalan sesuai dengan kebutuhan.
+
+- GET API Success Testing
+- GET API Error Testing
+- POST API Success Testing
+- POST API Validation Error Testing
+- POST API Network Error Testing
+
+Pengujian mencakup pemeriksaan respons API, validasi formulir, penanganan loading, serta penanganan kesalahan komunikasi dengan backend.
+
+## Catatan Proyek
+
+MamiKost merupakan proyek independen untuk keperluan edukasi dan technical assessment yang mengkloning website resmi Mamikos sebagai referensi. Proyek ini tidak berafiliasi atau memiliki hubungan resmi dengan Mamikos.
+
+Fokus utama pengembangan meliputi implementasi frontend menggunakan React.js, integrasi REST API, penanganan request, validasi formulir, dasar pengembangan backend menggunakan Express.js, serta pemanfaatan AI dalam proses pengembangan.
 
 ---
 
-**Developed for:** MagangHub – Frontend Engineer Technical Test  
-**Project:** MamiKost
+**Dikembangkan untuk:** MagangHub – Frontend Engineer Technical Test
+
+**Nama Proyek:** MamiKost
+
+**Developer:** Zulfa Bahrul Akmal
