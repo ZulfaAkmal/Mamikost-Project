@@ -1,0 +1,87 @@
+
+.other-kosts-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 35px auto;
+    padding: 28px;
+    background: var(--card-background, #ffffff);
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.other-kosts-header {
+    margin-bottom: 24px;
+}
+
+.other-kosts-eyebrow {
+    display: inline-block;
+    margin-bottom: 8px;
+    color: var(--brand-primary);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.other-kosts-header h2 {
+    margin: 0 0 8px;
+    color: var(--text-primary);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.other-kosts-header p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Horizontal Card Layout */
+
+.other-kosts-list {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 4px 2px 16px;
+
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db transparent;
+}
+
+.other-kosts-list::-webkit-scrollbar {
+    height: 5px;
+}
+
+.other-kosts-list::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 20px;
+}
+
+.other-kost-item {
+    flex: 0 0 300px;
+    min-width: 0;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .other-kosts-section {
+        padding: 20px;
+        margin: 25px auto;
+    }
+
+    .other-kost-item {
+        flex-basis: 270px;
+    }
+}
+
+@media (max-width: 480px) {
+    .other-kosts-section {
+        padding: 16px;
+    }
+
+    .other-kost-item {
+        flex-basis: 250px;
+    }
+}

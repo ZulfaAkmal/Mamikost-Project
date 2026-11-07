@@ -1,0 +1,23 @@
+{
+    "name": "mamikost-backend",
+    "version": "1.0.0",
+    "description": "Backend API untuk aplikasi MamiKost",
+    "main": "server.js",
+    "type": "module",
+    "scripts": {
+        "start": "node server.js",
+        "dev": "node --watch server.js"
+    },
+    "keywords": [
+        "mamikost",
+        "kost",
+        "express",
+        "api"
+    ],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^5.3.0"
+    }
+}
