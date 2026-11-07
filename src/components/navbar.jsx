@@ -6,7 +6,7 @@ function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const navLinks = [
-        { label: "Beranda", href: "/home-page" },
+        { label: "Beranda", href: "/home" },
         { label: "Cari Kost", href: "#kost" },
         { label: "Tentang Kami", href: "#about" },
         { label: "Kontak", href: "#contact" },
