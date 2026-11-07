@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import useKostDetail from "../hooks/useKostDetail";
-import useBooking from "../hooks/useBooking";
+import BookingModal from "./BookingModal";
 import "../css/kost-detail.css";
 
 import {
@@ -15,33 +16,15 @@ import {
     Wallet,
     Users,
     House,
-    CalendarDays,
-    Phone,
-    UserRound,
-    X,
-    Send,
-    Clock
+    CalendarDays
 } from "lucide-react";
 
 function KostDetailContent() {
     const { id } = useParams();
     const { kost, loading, error, fetchKostDetail } = useKostDetail(id);
 
-    // Booking Hook
-    const {
-        showBooking,
-        showSuccess,
-        bookingData,
-        errors,
-        getMinDate,
-        handleBookingChange,
-        handleBookingSubmit,
-        openBooking,
-        closeBooking,
-        closeSuccess
-    } = useBooking();
+    const [showBooking, setShowBooking] = useState(false);
 
-    // Format harga
     const formatPrice = (price) => {
         return new Intl.NumberFormat("id-ID", {
             style: "currency",
@@ -260,7 +243,7 @@ function KostDetailContent() {
                                     <button
                                         type="button"
                                         className="kost-booking-button"
-                                        onClick={openBooking}
+                                        onClick={() => setShowBooking(true)}
                                     >
                                         <CalendarDays size={18} />
                                         Reservasi Sekarang
@@ -285,254 +268,13 @@ function KostDetailContent() {
                 )}
             </div>
 
-            {/* =================================
-                BOOKING MODAL
-            ================================= */}
-            {showBooking && kost && (
-                <div
-                    className="booking-modal-overlay"
-                    onClick={closeBooking}
-                >
-                    <div
-                        className="booking-modal"
-                        onClick={(event) => event.stopPropagation()}
-                    >
-                        <div className="booking-modal-header">
-                            <div>
-                                <span className="booking-modal-eyebrow">
-                                    FORMULIR RESERVASI
-                                </span>
-                                <h2>Reservasi Kost</h2>
-                                <p>
-                                    Lengkapi informasi berikut untuk mengajukan
-                                    reservasi hunian.
-                                </p>
-                            </div>
-
-                            <button
-                                type="button"
-                                className="booking-modal-close"
-                                onClick={closeBooking}
-                                aria-label="Tutup formulir"
-                            >
-                                <X size={20} />
-                            </button>
-                        </div>
-
-                        {/* Kost Summary */}
-                        <div className="booking-kost-summary">
-                            <div className="booking-kost-icon">
-                                <House size={21} />
-                            </div>
-
-                            <div>
-                                <strong>{kost.name}</strong>
-                                <span>
-                                    {kost.area}, {kost.city}
-                                </span>
-                            </div>
-
-                            <strong className="booking-kost-price">
-                                {formatPrice(kost.price)}
-                                <small>/bln</small>
-                            </strong>
-                        </div>
-
-                        {/* Booking Form */}
-                        <form
-                            className="booking-form"
-                            onSubmit={handleBookingSubmit}
-                            noValidate
-                        >
-                            <div className="booking-form-group">
-                                <label htmlFor="booking-name">
-                                    Nama Lengkap
-                                </label>
-
-                                <div className="booking-input-wrapper">
-                                    <UserRound size={17} />
-                                    <input
-                                        type="text"
-                                        id="booking-name"
-                                        name="name"
-                                        placeholder="Masukkan nama lengkap"
-                                        value={bookingData.name}
-                                        onChange={handleBookingChange}
-                                        required
-                                    />
-                                </div>
-
-                                {errors.name && (
-                                    <small className="booking-error">
-                                        {errors.name}
-                                    </small>
-                                )}
-                            </div>
-
-                            <div className="booking-form-group">
-                                <label htmlFor="booking-phone">
-                                    Nomor WhatsApp
-                                </label>
-
-                                <div className="booking-input-wrapper">
-                                    <Phone size={17} />
-                                    <input
-                                        type="tel"
-                                        id="booking-phone"
-                                        name="phone"
-                                        placeholder="Contoh: 081234567890"
-                                        value={bookingData.phone}
-                                        onChange={handleBookingChange}
-                                        pattern="[0-9+\-\s]{9,16}"
-                                        title="Masukkan nomor telepon yang valid"
-                                        required
-                                    />
-                                </div>
-
-                                {errors.phone && (
-                                    <small className="booking-error">
-                                        {errors.phone}
-                                    </small>
-                                )}
-                            </div>
-
-                            <div className="booking-form-row">
-                                <div className="booking-form-group">
-                                    <label htmlFor="booking-date">
-                                        Tanggal Mulai
-                                    </label>
-
-                                    <div className="booking-input-wrapper">
-                                        <CalendarDays size={17} />
-                                        <input
-                                            type="date"
-                                            id="booking-date"
-                                            name="startDate"
-                                            min={getMinDate()}
-                                            value={bookingData.startDate}
-                                            onChange={handleBookingChange}
-                                            required
-                                        />
-                                    </div>
-
-                                    {errors.startDate && (
-                                        <small className="booking-error">
-                                            {errors.startDate}
-                                        </small>
-                                    )}
-                                </div>
-
-                                <div className="booking-form-group">
-                                    <label htmlFor="booking-duration">
-                                        Durasi Sewa
-                                    </label>
-
-                                    <div className="booking-input-wrapper">
-                                        <Clock size={17} />
-                                        <select
-                                            id="booking-duration"
-                                            name="duration"
-                                            value={bookingData.duration}
-                                            onChange={handleBookingChange}
-                                            required
-                                        >
-                                            <option value="1">1 Bulan</option>
-                                            <option value="3">3 Bulan</option>
-                                            <option value="6">6 Bulan</option>
-                                            <option value="12">12 Bulan</option>
-                                        </select>
-                                    </div>
-
-                                    {errors.duration && (
-                                        <small className="booking-error">
-                                            {errors.duration}
-                                        </small>
-                                    )}
-                                </div>
-                            </div>
-
-                            <div className="booking-form-group">
-                                <label htmlFor="booking-message">
-                                    Catatan Tambahan
-                                    <span className="booking-optional">
-                                        (Opsional)
-                                    </span>
-                                </label>
-
-                                <textarea
-                                    id="booking-message"
-                                    name="message"
-                                    rows="3"
-                                    placeholder="Tuliskan pertanyaan atau kebutuhan tambahan..."
-                                    value={bookingData.message}
-                                    onChange={handleBookingChange}
-                                />
-                            </div>
-
-                            <div className="booking-form-note">
-                                <Info size={16} />
-                                <p>
-                                    Pengajuan ini merupakan permintaan reservasi.
-                                    Konfirmasi ketersediaan kamar dilakukan
-                                    secara terpisah.
-                                </p>
-                            </div>
-
-                            <button
-                                type="submit"
-                                className="booking-submit-button"
-                            >
-                                <Send size={17} />
-                                Kirim Permintaan Reservasi
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            )}
-
-            {/* =================================
-                SUCCESS NOTIFICATION
-            ================================= */}
-            {showSuccess && (
-                <div
-                    className="booking-modal-overlay booking-success-overlay"
-                    onClick={closeSuccess}
-                >
-                    <div
-                        className="booking-success-modal"
-                        onClick={(event) => event.stopPropagation()}
-                    >
-                        <button
-                            type="button"
-                            className="booking-modal-close booking-success-close"
-                            onClick={closeSuccess}
-                            aria-label="Tutup notifikasi"
-                        >
-                            <X size={20} />
-                        </button>
-
-                        <div className="booking-success-icon">
-                            <Check size={34} />
-                        </div>
-
-                        <h2>Permintaan Berhasil Dikirim!</h2>
-
-                        <p>
-                            Terima kasih telah mengajukan reservasi.
-                            Permintaan Anda telah diterima dalam simulasi
-                            ini. Silakan tunggu konfirmasi ketersediaan
-                            kamar dari pengelola kost.
-                        </p>
-
-                        <button
-                            type="button"
-                            className="booking-success-button"
-                            onClick={closeSuccess}
-                        >
-                            Mengerti
-                        </button>
-                    </div>
-                </div>
+            {/* Booking Modal Component */}
+            {kost && (
+                <BookingModal
+                    kost={kost}
+                    isOpen={showBooking}
+                    onClose={() => setShowBooking(false)}
+                />
             )}
         </section>
     );
