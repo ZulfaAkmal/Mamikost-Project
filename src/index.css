@@ -1,27 +1,10 @@
-
-/* =====================================================
-   1. GOOGLE FONTS
-===================================================== */
-
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
-
-
-/* =====================================================
-   2. TAILWIND CSS
-===================================================== */
 
 @import "tailwindcss";
 
-
-/* =====================================================
-   3. TAILWIND THEME CONFIGURATION
-===================================================== */
-
 @theme {
-    /* Typography */
     --font-sans: "Plus Jakarta Sans", sans-serif;
 
-    /* Primary Colors */
     --color-primary-50: #eff6ff;
     --color-primary-100: #dbeafe;
     --color-primary-200: #bfdbfe;
@@ -33,7 +16,6 @@
     --color-primary-800: #1e40af;
     --color-primary-900: #1e3a8a;
 
-    /* Neutral Colors */
     --color-neutral-50: #f9fafb;
     --color-neutral-100: #f3f4f6;
     --color-neutral-200: #e5e7eb;
@@ -45,21 +27,14 @@
     --color-neutral-800: #1f2937;
     --color-neutral-900: #111827;
 
-    /* Semantic Colors */
     --color-success: #16a34a;
     --color-warning: #f59e0b;
     --color-danger: #dc2626;
 }
 
-
-/* =====================================================
-   4. GLOBAL CSS VARIABLES
-===================================================== */
-
 :root {
     font-family: "Plus Jakarta Sans", sans-serif;
 
-    /* Application Colors */
     --app-background: #f9fafb;
     --surface-color: #ffffff;
 
@@ -69,40 +44,26 @@
 
     --border-color: #e5e7eb;
 
-    /* Brand Colors */
     --brand-primary: #2563eb;
     --brand-primary-hover: #1d4ed8;
 
-    /* Layout */
     --container-width: 1200px;
     --header-height: 72px;
 
-    /* Border Radius */
     --radius-sm: 6px;
     --radius-md: 10px;
     --radius-lg: 16px;
     --radius-xl: 24px;
 
-    /* Shadows */
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.08);
 
-    --shadow-md:
-        0 4px 12px rgba(0, 0, 0, 0.06);
-
-    --shadow-lg:
-        0 10px 30px rgba(0, 0, 0, 0.08);
-
-    /* Transitions */
     --transition-fast: 150ms ease;
     --transition-normal: 250ms ease;
 
     color-scheme: light;
 }
-
-
-/* =====================================================
-   5. CSS RESET
-===================================================== */
 
 *,
 *::before,
@@ -111,15 +72,18 @@
 }
 
 html {
+    width: 100%;
     min-width: 320px;
     scroll-behavior: smooth;
     scroll-padding-top: calc(var(--header-height) + 16px);
+    overflow-x: clip;
 }
 
 body {
-    margin: 0;
+    width: 100%;
     min-width: 320px;
     min-height: 100vh;
+    margin: 0;
 
     font-family: var(--font-sans);
     font-size: 14px;
@@ -136,13 +100,16 @@ body {
 #root {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    min-width: 0;
     min-height: 100vh;
 }
 
-
-/* =====================================================
-   6. TYPOGRAPHY
-===================================================== */
+main {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+}
 
 h1,
 h2,
@@ -170,11 +137,6 @@ small {
     font-size: 12px;
 }
 
-
-/* =====================================================
-   7. GLOBAL ELEMENT STYLING
-===================================================== */
-
 button,
 input,
 textarea,
@@ -195,6 +157,7 @@ input,
 textarea,
 select {
     width: 100%;
+    max-width: 100%;
     color: var(--text-primary);
 }
 
@@ -225,11 +188,6 @@ img {
     object-fit: cover;
 }
 
-
-/* =====================================================
-   8. ACCESSIBILITY
-===================================================== */
-
 :focus-visible {
     outline: 2px solid var(--brand-primary);
     outline-offset: 3px;
@@ -240,13 +198,9 @@ img {
     background-color: var(--brand-primary);
 }
 
-
-/* =====================================================
-   9. GLOBAL LAYOUT UTILITIES
-===================================================== */
-
 .app-container {
-    width: min(100% - 40px, var(--container-width));
+    width: min(calc(100% - 40px), var(--container-width));
+    min-width: 0;
     margin-inline: auto;
 }
 
@@ -255,6 +209,7 @@ img {
 }
 
 .section-header {
+    min-width: 0;
     margin-bottom: 32px;
 }
 
@@ -270,12 +225,8 @@ img {
     color: var(--text-secondary);
 }
 
-
-/* =====================================================
-   10. GLOBAL CARD STYLING
-===================================================== */
-
 .app-card {
+    min-width: 0;
     background-color: var(--surface-color);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
@@ -287,15 +238,11 @@ img {
     box-shadow: var(--shadow-md);
 }
 
-
-/* =====================================================
-   11. GLOBAL FORM STYLING
-===================================================== */
-
 .form-group {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    min-width: 0;
 }
 
 .form-label {
@@ -305,15 +252,15 @@ img {
 }
 
 .form-control {
+    width: 100%;
+    min-width: 0;
     min-height: 44px;
     padding: 10px 14px;
-
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
-
     background-color: #ffffff;
-
     outline: none;
+
     transition:
         border-color var(--transition-fast),
         box-shadow var(--transition-fast);
@@ -323,11 +270,6 @@ img {
     border-color: var(--brand-primary);
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }
-
-
-/* =====================================================
-   12. SCROLLBAR
-===================================================== */
 
 ::-webkit-scrollbar {
     width: 8px;
@@ -347,43 +289,68 @@ img {
     background: #9ca3af;
 }
 
-
-/* =====================================================
-   13. RESPONSIVE ADJUSTMENTS
-===================================================== */
-
-@media (max-width: 768px) {
-    .app-container {
-        width: min(100% - 32px, var(--container-width));
-    }
-
-    .section-spacing {
-        padding-block: 40px;
-    }
-
-    .section-header {
-        margin-bottom: 24px;
-    }
-}
-
 @media (max-width: 480px) {
+    :root {
+        --header-height: 64px;
+    }
+
+    html,
+    body,
+    #root,
+    main {
+        width: 100%;
+        min-width: 0;
+        margin: 0;
+    }
+
     body {
         font-size: 13px;
     }
 
     .app-container {
-        width: min(100% - 28px, var(--container-width));
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        padding: 0;
+        margin: 0;
     }
 
     .section-spacing {
         padding-block: 32px;
     }
+
+    .section-header {
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        font-size: 22px;
+    }
+
+    .section-description {
+        font-size: 13px;
+    }
+
+    .app-card {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .form-group {
+        min-width: 0;
+    }
+
+    .form-control {
+        width: 100%;
+        min-width: 0;
+    }
+
+    img,
+    video,
+    svg {
+        max-width: 100%;
+    }
 }
-
-
-/* =====================================================
-   14. REDUCED MOTION
-===================================================== */
 
 @media (prefers-reduced-motion: reduce) {
     *,

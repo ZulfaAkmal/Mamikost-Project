@@ -1,5 +1,6 @@
-
 .footer {
+    width: 100%;
+    min-width: 0;
     margin-top: auto;
     padding-top: 64px;
     background: #ffffff;
@@ -7,11 +8,14 @@
 }
 
 .footer-main {
+    display: grid;
+    gap: 32px;
     padding-bottom: 48px;
 }
 
 .footer-brand {
     max-width: 310px;
+    min-width: 0;
 }
 
 .footer-description {
@@ -25,6 +29,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    min-width: 0;
 }
 
 .footer-heading {
@@ -78,6 +83,7 @@
 .footer-contact-link svg {
     width: 16px;
     height: 16px;
+    flex-shrink: 0;
 }
 
 .footer-bottom {
@@ -91,6 +97,7 @@
 
 .footer-bottom p {
     font-size: 12px;
+    line-height: 1.7;
     color: var(--text-muted);
 }
 
@@ -100,6 +107,7 @@
     }
 
     .footer-main {
+        gap: 30px;
         padding-bottom: 36px;
     }
 
@@ -116,10 +124,76 @@
 
 @media (max-width: 480px) {
     .footer {
-        padding-top: 36px;
+        padding: 38px 18px 0;
+    }
+
+    .footer > .app-container {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        padding: 0;
+        margin: 0;
     }
 
     .footer-main {
-        gap: 30px;
+        width: 100%;
+        gap: 27px;
+        padding-bottom: 30px;
+    }
+
+    .footer-brand {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .footer-description {
+        margin-top: 13px;
+        font-size: 12px;
+        line-height: 1.8;
+    }
+
+    .footer-column {
+        width: 100%;
+    }
+
+    .footer-heading {
+        margin-bottom: 13px;
+        font-size: 13px;
+    }
+
+    .footer-links {
+        gap: 11px;
+    }
+
+    .footer-links a {
+        font-size: 12px;
+    }
+
+    .footer-contact-text {
+        max-width: 100%;
+        font-size: 12px;
+    }
+
+    .footer-contact-link {
+        margin-top: 13px;
+        font-size: 12px;
+    }
+
+    .footer-bottom {
+        width: 100%;
+        gap: 7px;
+        padding-block: 18px;
+    }
+
+    .footer-bottom p {
+        font-size: 11px;
+        line-height: 1.7;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .footer-links a,
+    .footer-contact-link {
+        transition: none;
     }
 }

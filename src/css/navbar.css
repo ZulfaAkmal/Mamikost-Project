@@ -1,40 +1,28 @@
-/* =====================================================
-    NAVBAR BASE
-===================================================== */
-
 .navbar {
     position: sticky;
     top: 0;
     z-index: 1000;
-
     width: 100%;
     height: var(--header-height);
-
     background: rgba(255, 255, 255, 0.94);
     border-bottom: 1px solid rgba(229, 231, 235, 0.8);
-
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
 }
 
 .navbar-container {
     height: 100%;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 32px;
 }
 
-
-
 .navbar-brand {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-
     flex-shrink: 0;
-
     color: var(--text-primary);
     text-decoration: none;
 }
@@ -42,18 +30,12 @@
 .navbar-logo-icon {
     width: 38px;
     height: 38px;
-
     display: grid;
     place-items: center;
-
     color: #ffffff;
     background: var(--brand-primary);
-
     border-radius: 11px;
-
-    transition:
-        background var(--transition-fast),
-        transform var(--transition-fast);
+    transition: background var(--transition-fast), transform var(--transition-fast);
 }
 
 .navbar-logo-icon svg {
@@ -77,44 +59,33 @@
     color: var(--brand-primary);
 }
 
-
-
 .navbar-nav {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 32px;
-
     flex: 1;
 }
 
 .navbar-link {
     position: relative;
-
     padding-block: 8px;
-
     color: #6b7280;
     font-size: 13px;
     font-weight: 600;
-
     text-decoration: none;
-
     transition: color var(--transition-fast);
 }
 
 .navbar-link::after {
     content: "";
-
     position: absolute;
     left: 0;
     bottom: 0;
-
     width: 0;
     height: 2px;
-
     background: var(--brand-primary);
     border-radius: 10px;
-
     transition: width var(--transition-normal);
 }
 
@@ -126,8 +97,6 @@
     width: 100%;
 }
 
-
-
 .navbar-actions {
     display: flex;
     align-items: center;
@@ -136,43 +105,30 @@
 
 .navbar-cta {
     min-height: 42px;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 9px;
-
     padding: 0 19px;
-
     color: #ffffff;
     background: var(--brand-primary);
-
     border-radius: 9px;
-
     font-size: 13px;
     font-weight: 700;
-
     text-decoration: none;
-
     box-shadow: 0 3px 8px rgba(37, 99, 235, 0.16);
-
-    transition:
-        background var(--transition-fast),
-        transform var(--transition-fast),
-        box-shadow var(--transition-fast);
+    transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .navbar-cta svg {
     width: 16px;
     height: 16px;
-
     transition: transform var(--transition-fast);
 }
 
 .navbar-cta:hover {
     background: var(--brand-primary-hover);
     transform: translateY(-1px);
-
     box-shadow: 0 5px 12px rgba(37, 99, 235, 0.22);
 }
 
@@ -180,38 +136,28 @@
     transform: translateX(3px);
 }
 
-
-
 .navbar-menu-button {
     display: none;
-
     width: 42px;
     height: 42px;
-
     align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: 5px;
-
     padding: 0;
-
     background: #f3f4f6;
     border: 1px solid var(--border-color);
     border-radius: 9px;
-
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .navbar-menu-button span {
     width: 19px;
     height: 2px;
-
     background: #374151;
     border-radius: 5px;
-
-    transition:
-        transform var(--transition-fast),
-        opacity var(--transition-fast);
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
 }
 
 .navbar-menu-button.active span:nth-child(1) {
@@ -226,33 +172,20 @@
     transform: translateY(-7px) rotate(-45deg);
 }
 
-
-
 .navbar-mobile {
     display: none;
-
     position: absolute;
     top: 100%;
     left: 0;
-
     width: 100%;
-
     padding: 0 16px;
-
     background: #ffffff;
     border-bottom: 1px solid var(--border-color);
-
     box-shadow: var(--shadow-md);
-
     opacity: 0;
     visibility: hidden;
-
     transform: translateY(-8px);
-
-    transition:
-        opacity var(--transition-normal),
-        transform var(--transition-normal),
-        visibility var(--transition-normal);
+    transition: opacity var(--transition-normal), transform var(--transition-normal), visibility var(--transition-normal);
 }
 
 .navbar-mobile.open {
@@ -265,28 +198,20 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-
+    width: 100%;
     max-width: var(--container-width);
     margin-inline: auto;
-
     padding-block: 16px 20px;
 }
 
 .navbar-mobile-link {
     display: block;
-
     padding: 12px 14px;
-
     color: var(--text-secondary);
-
     font-size: 14px;
     font-weight: 600;
-
     border-radius: 8px;
-
-    transition:
-        color var(--transition-fast),
-        background var(--transition-fast);
+    transition: color var(--transition-fast), background var(--transition-fast);
 }
 
 .navbar-mobile-link:hover {
@@ -298,18 +223,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
     min-height: 45px;
     margin-top: 10px;
-
     color: #ffffff;
     background: var(--brand-primary);
-
     border-radius: 9px;
-
     font-size: 14px;
     font-weight: 700;
-
     transition: background var(--transition-fast);
 }
 
@@ -317,10 +237,7 @@
     background: var(--brand-primary-hover);
 }
 
-
-
 @media (max-width: 768px) {
-
     .navbar-container {
         gap: 16px;
     }
@@ -337,29 +254,64 @@
     .navbar-mobile {
         display: block;
     }
-
 }
 
 @media (max-width: 480px) {
+    .navbar {
+        width: 100%;
+    }
+
+    .navbar .navbar-container {
+        width: 100%;
+        max-width: 100%;
+        padding-inline: 18px;
+        margin: 0;
+    }
+
+    .navbar-brand {
+        gap: 8px;
+    }
 
     .navbar-brand-text {
-        font-size: 19px;
+        font-size: 18px;
     }
 
     .navbar-logo-icon {
-        width: 35px;
-        height: 35px;
+        width: 33px;
+        height: 33px;
+        border-radius: 9px;
     }
 
+    .navbar-logo-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .navbar-menu-button {
+        width: 39px;
+        height: 39px;
+        gap: 4px;
+        border-radius: 8px;
+    }
+
+    .navbar-menu-button span {
+        width: 17px;
+    }
+
+    .navbar-mobile {
+        width: 100%;
+        padding-inline: 18px;
+    }
+
+    .navbar-mobile-content {
+        width: 100%;
+        max-width: 100%;
+    }
 }
 
-
-
 @media (prefers-reduced-motion: reduce) {
-
     .navbar *,
     .navbar-mobile * {
         transition: none !important;
     }
-
 }

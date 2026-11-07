@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
-import Home from "./pages/Home";
-import KostDetail from "./pages/kostDetail";
+import Home from "./pages/home.jsx";
+import KostDetail from "./pages/KostDetail.jsx";;
 
 function App() {
     return (
